@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="theme">#7b2cbf</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="hint">#DA595454</color>
 </resources>

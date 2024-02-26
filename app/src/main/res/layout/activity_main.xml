@@ -136,21 +136,54 @@
         app:layout_constraintBottom_toBottomOf="@+id/include"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/myreq"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="My Request" />
+            >
+            <Button
+                android:layout_width="123dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="#BE9DD8"
+                android:layout_marginStart="16dp"
+                android:text="" />
+            <Button
+                android:id="@+id/myreq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/theme"
+                android:text="My Request" />
 
-        <Button
-            android:id="@+id/makereq"
+
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="16dp"
-            android:text="Make a Request" />
+            >
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="#BE9DD8"
+                android:text="" />
+            <Button
+                android:id="@+id/makereq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/theme"
+                android:text="Make a Request" />
+
+
+                </RelativeLayout>
+
+
+
+
 
     </RelativeLayout>
 
