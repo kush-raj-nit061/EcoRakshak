@@ -13,5 +13,6 @@
             android:layout_height="175dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/semi_circle"/>
+
     </RelativeLayout>
 </RelativeLayout>
