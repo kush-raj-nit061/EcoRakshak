@@ -13,6 +13,7 @@
         android:paddingVertical="5dp"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/sNo"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="0.3"
@@ -23,6 +24,7 @@
             android:layout_gravity="center"
             android:gravity="center_vertical"/>
         <TextView
+            android:id="@+id/query"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -32,6 +34,7 @@
             android:layout_gravity="center"
             android:gravity="center"/>
         <ImageView
+            android:id="@+id/status"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:padding="4dp"
@@ -43,6 +46,7 @@
             tools:ignore="RtlCompat"
             app:tint="#2BFF00" />
         <TextView
+            android:id="@+id/action"
             android:layout_width="70dp"
             android:layout_height="30dp"
             android:layout_gravity="center"

@@ -4,4 +4,5 @@
     <color name="theme">#7b2cbf</color>
     <color name="white">#FFFFFFFF</color>
     <color name="hint">#DA595454</color>
+    <color name="background">#e6ebe7</color>
 </resources>
