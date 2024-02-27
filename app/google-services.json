@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "165992130629",
+    "project_id": "eco-rakshak",
+    "storage_bucket": "eco-rakshak.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:165992130629:android:d071793f02a24b56cedb2c",
+        "android_client_info": {
+          "package_name": "com.ingray.eco_rakshak"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkjx0gomzv9Gu3MCZCT5p4KRnZ_wrzPJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:165992130629:android:6642823744752234cedb2c",
+        "android_client_info": {
+          "package_name": "com.ingray.ecorakshak"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkjx0gomzv9Gu3MCZCT5p4KRnZ_wrzPJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

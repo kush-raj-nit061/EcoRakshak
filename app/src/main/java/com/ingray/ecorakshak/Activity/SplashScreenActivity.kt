@@ -1,4 +1,4 @@
-package com.ingray.ecorakshak
+package com.ingray.ecorakshak.Activity
 import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
