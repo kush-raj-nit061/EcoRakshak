@@ -75,6 +75,7 @@ class SignupActivity : AppCompatActivity() {
                                     data.email=sEmail
                                     data.userType="0"
                                     data.phone=sPhone
+                                    data.userId = currUser.toString()
                                     if (currUser != null) {
                                         dref.child(currUser).setValue(data)
                                     }

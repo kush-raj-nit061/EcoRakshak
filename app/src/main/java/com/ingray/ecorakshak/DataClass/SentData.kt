@@ -1,19 +1,20 @@
 package com.ingray.ecorakshak.DataClass
 
 data class SentData(
-    val name:String ="",
-    val phone:String ="",
-    val email:String ="",
-    val hrsAgo:Long=0,
-    val itemType:String ="",
-    val district:String="",
-    val city:String="",
-    val pincode:String="",
-    val streetName:String="",
-    val landmark:String="",
-    val qtyKg:String = "",
-    val qtyNo:String="",
-    val time:String="",
-    val key:String="",
-    val status:String=""
+    var name:String ="",
+    var phone:String ="",
+    var email:String ="",
+    var hrsAgo:Long=0,
+    var itemType:String ="",
+    var district:String="",
+    var city:String="",
+    var pincode:String="",
+    var streetName:String="",
+    var landmark:String="",
+    var qtyKg:String = "",
+    var qtyNo:String="",
+    var time:String="",
+    var key:String="",
+    var status:String="",
+    var userId:String=""
 )
