@@ -19,13 +19,28 @@ class UserRequestActivity : AppCompatActivity() {
     var noOfReq:Long = 0
     var reqResol:Long = 0
     val dbRef = FirebaseDatabase.getInstance().reference.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child("Items")
+    val userRef = FirebaseDatabase.getInstance().reference.child("Users")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_request)
         val totalReq: TextView = findViewById(R.id.totalreq)
         val reqRes: TextView = findViewById(R.id.reqres)
+        val name:TextView = findViewById(R.id.name)
         val rv_user_req: RecyclerView = findViewById(R.id.rv_user_req)
         rv_user_req.itemAnimator = null
+        userRef.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val names:String = snapshot.child("name").value.toString()
+                    name.text = names.subSequence(0,1)
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
 
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

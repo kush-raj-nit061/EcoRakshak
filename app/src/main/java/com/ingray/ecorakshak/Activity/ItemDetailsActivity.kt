@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ScrollView
 import android.widget.Spinner
+import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -36,10 +37,25 @@ class ItemDetailsActivity : AppCompatActivity() {
     private val dbRef:DatabaseReference = FirebaseDatabase.getInstance().reference.child("Users")
     private val dbRefSet:DatabaseReference = FirebaseDatabase.getInstance().reference.child("Items")
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_details)
         callViewById()
+        val name: TextView = findViewById(R.id.name)
+        dbRef.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val names:String = snapshot.child("name").value.toString()
+                    name.text = names.subSequence(0,1)
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
         callOnClickListener()
     }
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -20,12 +21,28 @@ class AdminMainActivity : AppCompatActivity() {
     var noOfReq:Long = 0
     var reqResol:Long = 0
     val dbRef = FirebaseDatabase.getInstance().reference.child("Items")
+    val userRef = FirebaseDatabase.getInstance().reference.child("Users")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_main)
         val totalReq: TextView = findViewById(R.id.totalreq)
         val reqRes: TextView = findViewById(R.id.reqres)
         val rv_Admin: RecyclerView = findViewById(R.id.rv_admin)
+        val name:TextView = findViewById(R.id.name)
+
+        userRef.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val names:String = snapshot.child("name").value.toString()
+                    name.text = names.subSequence(0,1)
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
 
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
