@@ -1,4 +1,4 @@
-package com.ingray.ecorakshak.Activity
+package com.ingray.ecorakshak
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
