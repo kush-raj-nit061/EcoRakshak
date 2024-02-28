@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                     noOfReq= snapshot.childrenCount
                     totalReq.text = "Number of Requests : $noOfReq"
                     for (snaps in snapshot.children){
-                        if (snapshot.child("status").getValue().toString()
+                        if (snaps.child("status").value.toString()
                                 .lowercase(Locale.ROOT) =="done"){
                             reqResol +=1;
                         }
@@ -80,20 +80,14 @@ class MainActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         })
-
-
-
-
-
         val options: FirebaseRecyclerOptions<SentData?> =
             FirebaseRecyclerOptions.Builder<SentData>()
                 .setQuery(
-                    FirebaseDatabase.getInstance().reference.child("Clubs"),
+                    FirebaseDatabase.getInstance().reference.child("Items"),
                     SentData::class.java
                 )
                 .build()
         adapter = MainAdapter(options)
-
         rv_user.adapter = adapter
         adapter.startListening()
     }

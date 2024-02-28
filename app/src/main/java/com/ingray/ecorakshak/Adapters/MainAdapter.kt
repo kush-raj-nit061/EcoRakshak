@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.ingray.ecorakshak.CustomDialog
 import com.ingray.ecorakshak.DataClass.SentData
 import com.ingray.ecorakshak.R
 import java.util.Locale
@@ -23,11 +25,16 @@ class MainAdapter(options: FirebaseRecyclerOptions<SentData?>) :
         position: Int,
         model: SentData
     ) {
-        holder.sNo.text = position.toString()
+
+        holder.sNo.text = (position+1).toString()
         holder.query.text = model.key
         if(model.status.lowercase(Locale.ROOT) =="waiting"){
             val tintColor = ContextCompat.getColor(holder.status.context, R.color.red)
             holder.status.setColorFilter(tintColor, PorterDuff.Mode.SRC_ATOP)
+        }
+        holder.query.setOnClickListener{
+            val customDialog = CustomDialog(holder.itemView.context, model,0)
+            customDialog.showDialog()
         }
 
     }

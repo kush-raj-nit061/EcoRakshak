@@ -60,10 +60,11 @@ class LoginActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
 
                             if(auth.currentUser?.isEmailVerified == true){
-                                 dbRef.child(auth.currentUser.toString()).addListenerForSingleValueEvent(object :ValueEventListener{
+
+                                 dbRef.child(auth.currentUser?.uid.toString()).addListenerForSingleValueEvent(object :ValueEventListener{
                                     override fun onDataChange(snapshot: DataSnapshot) {
                                         if (snapshot.exists()){
-                                            if (snapshot.child("userType").getValue()=="1"){
+                                            if (snapshot.child("userType").value =="1"){
                                                 val intent = Intent(applicationContext,AdminMainActivity::class.java)
                                                 startActivity(intent)
                                                 finish()
@@ -71,6 +72,7 @@ class LoginActivity : AppCompatActivity() {
                                                 val intent = Intent(applicationContext,MainActivity::class.java)
                                                 startActivity(intent)
                                                 finish()
+
                                             }
                                         }
                                     }
@@ -137,7 +139,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun callVariablesById() {
         email = findViewById(R.id.etEmail)
-        password = findViewById(R.id.etPass)
+        password = findViewById(R.id.etPassword)
         reset = findViewById(R.id.tvForget)
         signup = findViewById(R.id.tvSignup)
         signin= findViewById(R.id.login)

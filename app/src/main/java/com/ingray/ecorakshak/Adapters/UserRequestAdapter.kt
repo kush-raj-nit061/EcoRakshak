@@ -1,16 +1,22 @@
 package com.ingray.ecorakshak.Adapters
 
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.ingray.ecorakshak.CustomDialog
 import com.ingray.ecorakshak.DataClass.SentData
 import com.ingray.ecorakshak.R
 import java.util.Locale
@@ -23,20 +29,43 @@ class UserRequestAdapter(options: FirebaseRecyclerOptions<SentData?>) :
         position: Int,
         model: SentData
     ) {
-        holder.sNo.text = position.toString()
+        holder.sNo.text = (position+1).toString()
         holder.query.text = model.key
         if(model.status.lowercase(Locale.ROOT) =="waiting"){
             val tintColor = ContextCompat.getColor(holder.status.context, R.color.red)
             holder.status.setColorFilter(tintColor, PorterDuff.Mode.SRC_ATOP)
         }
-        holder.action.text=model.status
+        holder.action.text="Delete"
+
+        holder.action.setOnClickListener{
+            val builder: AlertDialog.Builder = AlertDialog.Builder(holder.action.context)
+            builder
+
+                .setTitle("Do You surely want to delete?")
+                .setPositiveButton("Yes") { dialog, which ->
+                    FirebaseDatabase.getInstance().reference.child("Items").child(model.key).removeValue()
+                    FirebaseDatabase.getInstance().reference.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child("Items").child(model.key).removeValue()
+                    Toast.makeText(holder.action.context,"Deleted", Toast.LENGTH_LONG).show()
+                }
+                .setNegativeButton("No") { dialog, which ->
+                    // Do something else.
+                }
+
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+
+        }
+        holder.query.setOnClickListener{
+            val customDialog = CustomDialog(holder.itemView.context, model,1)
+            customDialog.showDialog()
+        }
 
     }
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): userAdapterHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.user_page_item,parent,false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.admin_page_item,parent,false)
         return userAdapterHolder(view)
     }
 

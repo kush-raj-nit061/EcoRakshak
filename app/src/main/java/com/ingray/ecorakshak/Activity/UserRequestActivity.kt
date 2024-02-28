@@ -18,7 +18,7 @@ class UserRequestActivity : AppCompatActivity() {
     private lateinit var adapter:UserRequestAdapter
     var noOfReq:Long = 0
     var reqResol:Long = 0
-    val dbRef = FirebaseDatabase.getInstance().reference.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child("Items")
+    val dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child("Items")
     val userRef = FirebaseDatabase.getInstance().reference.child("Users")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +48,7 @@ class UserRequestActivity : AppCompatActivity() {
                     noOfReq= snapshot.childrenCount
                     totalReq.text = "Number of Requests : $noOfReq"
                     for (snaps in snapshot.children){
-                        if (snapshot.child("status").getValue().toString()
+                        if (snaps.child("status").getValue().toString()
                                 .lowercase(Locale.ROOT) =="done"){
                             reqResol +=1;
                         }
@@ -65,12 +65,11 @@ class UserRequestActivity : AppCompatActivity() {
         val options: FirebaseRecyclerOptions<SentData?> =
             FirebaseRecyclerOptions.Builder<SentData>()
                 .setQuery(
-                    FirebaseDatabase.getInstance().reference.child("Clubs"),
+                    dbRef,
                     SentData::class.java
                 )
                 .build()
         adapter = UserRequestAdapter(options)
-
         rv_user_req.adapter = adapter
         adapter.startListening()
     }

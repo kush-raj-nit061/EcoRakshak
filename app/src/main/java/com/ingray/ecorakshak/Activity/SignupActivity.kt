@@ -77,21 +77,25 @@ class SignupActivity : AppCompatActivity() {
                                     data.phone=sPhone
                                     data.userId = currUser.toString()
                                     if (currUser != null) {
-                                        dref.child(currUser).setValue(data)
+                                        dref.child(currUser).setValue(data).addOnCompleteListener{
+                                            if (it.isSuccessful) {
+                                                Toast.makeText(
+                                                    applicationContext,
+                                                    "Registration successful! Check your email for verification link",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                                val intent: Intent = Intent(
+                                                    this,
+                                                    LoginActivity::class.java
+                                                )
+                                                intent.putExtra("email", sEmail)
+                                                startActivity(intent)
+                                                finish()
+                                            }
+                                        }
                                     }
 
-                                    Toast.makeText(
-                                        applicationContext,
-                                        "Registration successful! Check your email for verification link",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    val intent: Intent = Intent(
-                                        this,
-                                        LoginActivity::class.java
-                                    )
-                                    intent.putExtra("email",sEmail)
-                                    startActivity(intent)
-                                    finish()
+
                                 } else {
                                     Toast.makeText(
                                         applicationContext,

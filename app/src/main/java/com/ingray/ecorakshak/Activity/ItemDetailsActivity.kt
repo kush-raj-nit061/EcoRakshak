@@ -4,11 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ScrollView
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -56,7 +59,27 @@ class ItemDetailsActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         })
+        getItemFromSpinner()
         callOnClickListener()
+    }
+    private fun getItemFromSpinner() {
+        val data= arrayOf("Mobile/Telephone","CFL/Tube Light","Clothing Iron","Computer/Laptop","Computer Accessories","Tablets/I-PAD",
+            "Printer/Scanner","Camera/CCTV","Electric Fan","TV/Set top Boxes","Inverter","Refrigerator","Washing Machine","Air Conditioner","Radio Set/Sound Box",
+            "Solar Panel","Microwave Oven","Induction Stove","Electric cooker","Kettle","Grinder","Electric Toys","Others")
+        val adapt= ArrayAdapter(this,android.R.layout.simple_spinner_item,data)
+        adapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        itemList.adapter=adapt
+        itemList.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                itemType = parent.getItemAtPosition(position).toString()
+                // Handle the selected item
+                Toast.makeText(applicationContext,itemType,Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Handle no selection
+            }
+        }
     }
 
     private fun callOnClickListener() {
@@ -85,7 +108,7 @@ class ItemDetailsActivity : AppCompatActivity() {
                         items.phone = user?.phone.toString()
                         items.userId=user?.userId.toString()
                         items.status = "Waiting"
-                        val time:String = Calendar.getInstance().toString()
+                        val time:String = Calendar.getInstance().timeInMillis.toString()
                         items.time = time
                         items.key= time
 
